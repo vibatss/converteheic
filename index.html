@@ -1,26 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Conversor gratuito de HEIC para JPG – Rápido, online e fácil</title>
-  <link rel="icon" href="favicon.png" type="image/png">
+  <meta charset="UTF-8" />
+  <title>Conversor gratuito de HEIC para JPG</title>
+  <meta name="description" content="Conversor gratuito de imagens HEIC para JPG online. Rápido, direto no navegador, sem instalar nada.">
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://converteheic.com/" />
-
-  <!-- SEO META TAGS -->
-  <meta name="description" content="Converta imagens HEIC para JPG com nosso conversor gratuito e online. Rápido, direto no navegador, sem precisar instalar nada.">
-  <meta name="keywords" content="conversor gratuito, converter heic, heic para jpg, conversor heic online, heic to jpg">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Converte HEIC">
-  <meta property="og:title" content="Conversor gratuito de HEIC para JPG">
-  <meta property="og:description" content="Converta imagens HEIC para JPG direto do navegador. Gratuito e rápido.">
-  <meta property="og:image" content="https://converteheic.com/favicon.png">
-  <meta property="og:url" content="https://converteheic.com">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- ADSENSE -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7918552321324429"
-     crossorigin="anonymous"></script>
-
+  <link rel="icon" href="favicon.png" type="image/png" />
   <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
   <style>
     body {
@@ -57,64 +43,42 @@
       background-color: #4CAF50;
       color: #fff;
       border: none;
-      padding: 15px 30px;
-      font-size: 18px;
+      padding: 12px 24px;
+      font-size: 16px;
       border-radius: 6px;
       cursor: pointer;
+      font-weight: bold;
       transition: background-color 0.3s ease;
     }
     .botao-principal:hover {
-      background-color: #45a049;
-    }
-    .icon-row {
-      margin-top: 10px;
-    }
-    .icon-row img {
-      width: 36px;
-      height: 36px;
-      margin: 0 5px;
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
-    .drop-text {
-      margin-top: 10px;
-      color: #999;
-    }
-    .alerta {
-      color: red;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    #preview img {
-      max-width: 100%;
-      margin: 10px 0;
+      background-color: #43a047;
     }
     .download-link {
       display: block;
-      margin-bottom: 20px;
-    }
-    #carregando {
-      display: none;
-      margin: 20px auto;
+      margin: 10px 0;
+      color: #007bff;
       font-weight: bold;
     }
-    .spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #4CAF50;
+    .spinner-convertendo {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid #ccc;
+      border-top: 2px solid #ffa500;
       border-radius: 50%;
-      width: 30px;
-      height: 30px;
       animation: spin 1s linear infinite;
-      margin: 0 auto 10px;
     }
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    footer {
-      margin-top: 50px;
-      font-size: 12px;
-      color: #aaa;
+    .file-box {
+      background: #fff;
+      border-radius: 6px;
+      padding: 10px;
+      margin: 10px auto;
+      width: 80%;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
     }
   </style>
 </head>
@@ -124,52 +88,53 @@
   </header>
 
   <div class="container">
-    <h2>Conversor gratuito de HEIC para JPG</h2>
-    <p>Transforme imagens HEIC para o formato JPG. <br> Converta até 5 imagens por vez diretamente no seu navegador.</p>
+    <h2>Converter HEIC para JPG</h2>
+    <p>Transforme imagens HEIC para JPG gratuitamente, diretamente no navegador.</p>
 
-    <input type="file" id="upload" accept=".heic" multiple hidden>
+    <input type="file" id="upload" accept=".heic" multiple hidden />
     <button class="botao-principal" onclick="document.getElementById('upload').click()">Selecionar imagens</button>
 
-    <div class="icon-row">
-      <img src="https://cdn-icons-png.flaticon.com/512/270/270798.png" alt="Google Drive" title="Em breve">
-      <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Dropbox" title="Em breve">
-    </div>
-
-    <div class="drop-text">ou arraste suas imagens aqui</div>
-
-    <div id="alerta" class="alerta"></div>
-    <div id="carregando">
-      <div class="spinner"></div>
-      Carregando...
-    </div>
     <div id="preview"></div>
   </div>
-
-  <footer>
-    &copy; ConverteHEIC 2025 - Todos os direitos reservados
-  </footer>
 
   <script>
     const upload = document.getElementById('upload');
     const preview = document.getElementById('preview');
-    const alerta = document.getElementById('alerta');
-    const carregando = document.getElementById('carregando');
 
     upload.addEventListener('change', async () => {
       preview.innerHTML = '';
-      alerta.textContent = '';
-      carregando.style.display = 'none';
-
       const files = upload.files;
 
       if (files.length > 5) {
-        alerta.textContent = '⚠️ Por favor, selecione no máximo 5 arquivos.';
+        alert("⚠️ Por favor, selecione no máximo 5 arquivos.");
         return;
       }
 
-      carregando.style.display = 'block';
-
       for (let file of files) {
+        const fileBox = document.createElement('div');
+        fileBox.className = "file-box";
+
+        const fileName = document.createElement('p');
+        fileName.textContent = file.name;
+        fileName.style.fontWeight = 'bold';
+
+        const statusLabel = document.createElement('span');
+        statusLabel.textContent = 'A CONVERTER';
+        statusLabel.style.color = '#ffa500';
+        statusLabel.style.fontWeight = 'bold';
+
+        const spinner = document.createElement('span');
+        spinner.className = 'spinner-convertendo';
+        spinner.style.marginLeft = '10px';
+
+        const statusDiv = document.createElement('div');
+        statusDiv.appendChild(statusLabel);
+        statusDiv.appendChild(spinner);
+
+        fileBox.appendChild(fileName);
+        fileBox.appendChild(statusDiv);
+        preview.appendChild(fileBox);
+
         try {
           const resultBlob = await heic2any({
             blob: file,
@@ -178,25 +143,18 @@
           });
 
           const url = URL.createObjectURL(resultBlob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = file.name.replace(/\.heic$/i, '.jpg');
-          link.textContent = `⬇️ Baixar ${link.download}`;
-          link.className = "download-link";
 
-          const img = document.createElement('img');
-          img.src = url;
-
-          preview.appendChild(img);
-          preview.appendChild(link);
-        } catch (e) {
-          const error = document.createElement('p');
-          error.textContent = `❌ Erro ao converter ${file.name}`;
-          preview.appendChild(error);
+          fileBox.innerHTML = '';
+          const downloadLink = document.createElement('a');
+          downloadLink.href = url;
+          downloadLink.download = file.name.replace(/\.heic$/i, '.jpg');
+          downloadLink.textContent = `⬇️ Baixar ${downloadLink.download}`;
+          downloadLink.className = "download-link";
+          fileBox.appendChild(downloadLink);
+        } catch {
+          fileBox.innerHTML = `❌ Erro ao converter ${file.name}`;
         }
       }
-
-      carregando.style.display = 'none';
     });
   </script>
 </body>
