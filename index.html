@@ -7,94 +7,118 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://converteheic.com/" />
   <link rel="icon" href="favicon.png" type="image/png" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7918552321324429" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+      font-family: sans-serif;
+      background: #f9f9f9;
       margin: 0;
       padding: 0;
-      text-align: center;
     }
     header {
-      padding: 20px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      padding: 20px 20px 20px 60px;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
+    header img {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      height: 40px;
+    }
+    h1 {
       color: #4CAF50;
+      margin: 0;
+      font-size: 24px;
     }
     .container {
       padding: 40px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
-      color: #333;
-    }
-    p {
-      font-size: 18px;
-      color: #666;
-      margin: 10px 0 30px;
-    }
-    .botao-principal {
-      background-color: #4CAF50;
+    .btn-upload {
+      background: #4CAF50;
       color: #fff;
+      padding: 12px 28px;
       border: none;
-      padding: 12px 24px;
+      border-radius: 4px;
       font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
       font-weight: bold;
-      transition: background-color 0.3s ease;
+      cursor: pointer;
+      transition: background 0.3s;
     }
-    .botao-principal:hover {
-      background-color: #43a047;
+    .btn-upload:hover {
+      background: #43a047;
+    }
+    .file-list {
+      margin-top: 30px;
+    }
+    .file-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f2f2f2;
+      border-radius: 4px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+    }
+    .file-name {
+      font-weight: 500;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .file-status {
+      margin-left: 12px;
+      font-size: 14px;
+      color: #888;
     }
     .download-link {
-      display: block;
-      margin: 10px 0;
       color: #007bff;
+      text-decoration: none;
       font-weight: bold;
     }
-    .spinner-convertendo {
-      display: inline-block;
-      width: 12px;
-      height: 12px;
+    .remove {
+      color: #e53935;
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 15px;
+    }
+    .spinner {
+      width: 14px;
+      height: 14px;
       border: 2px solid #ccc;
-      border-top: 2px solid #ffa500;
+      border-top: 2px solid orange;
       border-radius: 50%;
       animation: spin 1s linear infinite;
+      margin-left: 10px;
     }
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    .file-box {
-      background: #fff;
-      border-radius: 6px;
-      padding: 10px;
-      margin: 10px auto;
-      width: 80%;
-      box-shadow: 0 0 5px rgba(0,0,0,0.05);
-    }
   </style>
 </head>
 <body>
   <header>
+    <img src="logo.png" alt="Logo" />
     <h1>CONVERTE HEIC</h1>
   </header>
 
   <div class="container">
     <h2>Converter HEIC para JPG</h2>
-    <p>Transforme imagens HEIC para JPG gratuitamente, diretamente no navegador.</p>
+    <p>Conversor gratuito direto no navegador. Até 5 imagens por vez.</p>
 
     <input type="file" id="upload" accept=".heic" multiple hidden />
-    <button class="botao-principal" onclick="document.getElementById('upload').click()">Selecionar imagens</button>
+    <button class="btn-upload" onclick="document.getElementById('upload').click()">Selecionar imagens</button>
 
-    <div id="preview"></div>
+    <div class="file-list" id="preview"></div>
   </div>
 
   <script>
@@ -102,57 +126,42 @@
     const preview = document.getElementById('preview');
 
     upload.addEventListener('change', async () => {
-      preview.innerHTML = '';
-      const files = upload.files;
+      const files = [...upload.files];
 
       if (files.length > 5) {
-        alert("⚠️ Por favor, selecione no máximo 5 arquivos.");
+        alert("Por favor, envie até 5 arquivos.");
         return;
       }
 
+      preview.innerHTML = '';
+
       for (let file of files) {
-        const fileBox = document.createElement('div');
-        fileBox.className = "file-box";
+        const item = document.createElement('div');
+        item.className = "file-item";
 
-        const fileName = document.createElement('p');
-        fileName.textContent = file.name;
-        fileName.style.fontWeight = 'bold';
+        const name = document.createElement('div');
+        name.className = "file-name";
+        name.textContent = file.name;
 
-        const statusLabel = document.createElement('span');
-        statusLabel.textContent = 'A CONVERTER';
-        statusLabel.style.color = '#ffa500';
-        statusLabel.style.fontWeight = 'bold';
+        const status = document.createElement('div');
+        status.innerHTML = '<span class="file-status">A CONVERTER</span><span class="spinner"></span>';
 
-        const spinner = document.createElement('span');
-        spinner.className = 'spinner-convertendo';
-        spinner.style.marginLeft = '10px';
+        const remove = document.createElement('span');
+        remove.className = 'remove';
+        remove.innerHTML = '&times;';
+        remove.onclick = () => item.remove();
 
-        const statusDiv = document.createElement('div');
-        statusDiv.appendChild(statusLabel);
-        statusDiv.appendChild(spinner);
-
-        fileBox.appendChild(fileName);
-        fileBox.appendChild(statusDiv);
-        preview.appendChild(fileBox);
+        item.appendChild(name);
+        item.appendChild(status);
+        item.appendChild(remove);
+        preview.appendChild(item);
 
         try {
-          const resultBlob = await heic2any({
-            blob: file,
-            toType: "image/jpeg",
-            quality: 0.9
-          });
-
+          const resultBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.9 });
           const url = URL.createObjectURL(resultBlob);
-
-          fileBox.innerHTML = '';
-          const downloadLink = document.createElement('a');
-          downloadLink.href = url;
-          downloadLink.download = file.name.replace(/\.heic$/i, '.jpg');
-          downloadLink.textContent = `⬇️ Baixar ${downloadLink.download}`;
-          downloadLink.className = "download-link";
-          fileBox.appendChild(downloadLink);
+          item.innerHTML = `<div class="file-name"><a class="download-link" href="${url}" download="${file.name.replace(/\\.heic$/i, '.jpg')}">⬇️ Baixar ${file.name.replace(/\\.heic$/i, '.jpg')}</a></div>`;
         } catch {
-          fileBox.innerHTML = `❌ Erro ao converter ${file.name}`;
+          item.innerHTML = `<div class="file-name" style="color: red;">Erro ao converter ${file.name}</div>`;
         }
       }
     });
