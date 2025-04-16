@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HEIC to JPG Converter</title>
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    input[type="file"] {
+      margin: 20px;
+    }
+    .preview img {
+      max-width: 100%;
+      margin: 10px 0;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    a.download-link {
+      display: block;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Convert HEIC to JPG</h1>
+  <p>Select your HEIC files below. They’ll be converted right in your browser.</p>
+
+  <input type="file" id="upload" accept=".heic" multiple>
+  <div id="preview" class="preview"></div>
+
+  <script>
+    const upload = document.getElementById('upload');
+    const preview = document.getElementById('preview');
+
+    upload.addEventListener('change', async () => {
+      preview.innerHTML = '';
+
+      const files = upload.files;
+
+      for (let file of files) {
+        try {
+          const resultBlob = await heic2any({
+            blob: file,
+            toType: "image/jpeg",
+            quality: 0.9
+          });
+
+          const url = URL.createObjectURL(resultBlob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = file.name.replace(/\.heic$/i, '.jpg');
+          link.textContent = `⬇️ Download ${link.download}`;
+          link.className = "download-link";
+
+          const img = document.createElement('img');
+          img.src = url;
+
+          preview.appendChild(img);
+          preview.appendChild(link);
+        } catch (e) {
+          const error = document.createElement('p');
+          error.textContent = `❌ Error converting ${file.name}`;
+          preview.appendChild(error);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
