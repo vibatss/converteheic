@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Conversor gratuito de HEIC para JPG</title>
 
-  <!-- ✅ SEO -->
+  <!-- SEO -->
   <meta name="description" content="Converta imagens HEIC para JPG, PNG ou WEBP gratuitamente e diretamente no navegador. Rápido, simples e seguro." />
   <link rel="canonical" href="https://converteheic.com/" />
   <meta name="robots" content="index, follow" />
@@ -100,6 +100,11 @@
       background-color: white;
       color: #4CAF50;
       border: 2px solid #4CAF50;
+    }
+
+    select.btn:hover {
+      background-color: #4CAF50;
+      color: white;
     }
 
     #preview {
@@ -257,7 +262,7 @@
           const url = URL.createObjectURL(result);
           const link = document.createElement("a");
           link.href = url;
-          link.download = file.name.replace(/\.heic$/i, `.${extensao}`);
+          link.download = file.name.replace(/\\.heic$/i, `.${extensao}`);
           link.textContent = `⬇️ Baixar ${link.download}`;
           link.className = "btn";
           link.style.display = "block";
