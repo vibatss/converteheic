@@ -1,8 +1,20 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/blog",
       "destination": "/blog/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "**/*.html",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html; charset=utf-8"
+        }
+      ]
     }
   ]
 }
