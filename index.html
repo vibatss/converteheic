@@ -3,15 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conversor gratuito de HEIC para JPG, PNG e WEBP</title>
+  <title>Conversor gratuito de HEIC para JPG</title>
 
-  <!-- SEO -->
   <meta name="description" content="Converta imagens HEIC para JPG, PNG ou WEBP gratuitamente e diretamente no navegador. Rápido, simples e seguro." />
   <link rel="canonical" href="https://converteheic.com/" />
   <meta name="robots" content="index, follow" />
-
   <link rel="icon" href="favicon.png" type="image/png" />
   <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
+
+  <!-- ✅ SCHEMA MARKUP -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Converte HEIC",
+    "url": "https://converteheic.com",
+    "applicationCategory": "WebApplication",
+    "operatingSystem": "All",
+    "description": "Conversor gratuito de imagens HEIC para JPG diretamente no navegador.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    }
+  }
+  </script>
 
   <style>
     * { box-sizing: border-box; }
@@ -23,7 +39,6 @@
       color: #333;
       text-align: center;
     }
-
     header {
       display: flex;
       align-items: center;
@@ -31,18 +46,15 @@
       background-color: #ffffff;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-
     header img {
       height: 40px;
       margin-right: 10px;
     }
-
     header h1 {
       margin: 0;
       font-size: 20px;
       color: #4CAF50;
     }
-
     .container {
       max-width: 600px;
       margin: 40px auto;
@@ -51,19 +63,16 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
-
     h2 {
       font-size: 26px;
       color: #333;
       margin-bottom: 10px;
     }
-
     p {
       color: #666;
       font-size: 16px;
       margin-bottom: 25px;
     }
-
     .upload-area {
       border: 2px dashed #4CAF50;
       padding: 40px;
@@ -72,16 +81,13 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     .upload-area p {
       margin: 10px 0;
       font-weight: bold;
     }
-
     #upload {
       display: none;
     }
-
     .btn {
       background-color: #4CAF50;
       color: #fff;
@@ -91,27 +97,22 @@
       border-radius: 6px;
       cursor: pointer;
     }
-
     .btn:hover {
       background-color: #45a049;
     }
-
     select.btn {
       background-color: white;
       color: #4CAF50;
       border: 2px solid #4CAF50;
     }
-
     select.btn:hover {
       background-color: #4CAF50;
       color: white;
     }
-
     #preview {
       margin-top: 20px;
       text-align: left;
     }
-
     .file-entry {
       background: #f1f1f1;
       padding: 10px;
@@ -121,12 +122,10 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .file-entry span {
       font-size: 14px;
       color: #333;
     }
-
     .file-entry button {
       background: none;
       border: none;
@@ -134,13 +133,11 @@
       font-size: 16px;
       cursor: pointer;
     }
-
     #carregando {
       display: none;
       margin: 20px;
       text-align: center;
     }
-
     .spinner {
       border: 4px solid #f3f3f3;
       border-top: 4px solid #4CAF50;
@@ -150,12 +147,10 @@
       animation: spin 1s linear infinite;
       margin: 0 auto 10px;
     }
-
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-
     footer {
       text-align: center;
       padding: 30px 10px;
