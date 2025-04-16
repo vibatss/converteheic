@@ -3,115 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <title>Conversor gratuito de HEIC para JPG</title>
-  <meta name="description" content="Conversor gratuito de imagens HEIC para JPG online. Rápido, direto no navegador, sem instalar nada.">
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://converteheic.com/" />
   <link rel="icon" href="favicon.png" type="image/png" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7918552321324429" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
   <style>
-    * { box-sizing: border-box; }
     body {
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
       margin: 0;
       padding: 0;
-      text-align: center;
+      background: #fafafa;
+      color: #333;
     }
+
     header {
       display: flex;
       align-items: center;
-      padding: 20px 40px;
-      background: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 15px 30px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+
     header img {
-      height: 36px;
+      height: 40px;
       margin-right: 10px;
     }
+
     header h1 {
       margin: 0;
-      font-size: 24px;
+      font-size: 20px;
       color: #4CAF50;
     }
+
     .container {
-      max-width: 800px;
+      max-width: 600px;
       margin: 40px auto;
-      background: #fff;
-      padding: 40px;
+      padding: 30px;
+      background-color: #ffffff;
       border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
+
     h2 {
-      margin-top: 0;
-      font-size: 28px;
+      font-size: 26px;
       color: #333;
+      margin-bottom: 10px;
     }
-    .subtitle {
-      color: #777;
-      margin-bottom: 30px;
+
+    p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 25px;
     }
-    .dropzone {
+
+    .upload-area {
       border: 2px dashed #4CAF50;
-      border-radius: 8px;
       padding: 40px;
-      background: #f6fff6;
-      cursor: pointer;
+      margin-bottom: 20px;
+      background-color: #f6fff6;
+      border-radius: 8px;
     }
-    .dropzone:hover {
-      background: #efffef;
-    }
-    .btn {
-      background: #4CAF50;
-      color: white;
-      border: none;
+
+    .upload-area p {
+      margin: 10px 0;
       font-weight: bold;
-      padding: 12px 28px;
+    }
+
+    #upload {
+      display: none;
+    }
+
+    .btn {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
     }
-    .file-list {
-      margin-top: 30px;
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    #preview {
+      margin-top: 20px;
       text-align: left;
     }
-    .file-item {
-      background: #f0f0f0;
-      padding: 14px 20px;
-      margin-bottom: 12px;
+
+    .file-entry {
+      background: #f1f1f1;
+      padding: 10px;
       border-radius: 6px;
+      margin-bottom: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .remove {
+
+    .file-entry span {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .file-entry button {
+      background: none;
+      border: none;
       color: red;
-      font-weight: bold;
+      font-size: 16px;
       cursor: pointer;
-      margin-left: 15px;
     }
-    .download-link {
-      color: #007bff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .icon-row {
-      margin-top: 20px;
-    }
-    .icon-row img {
-      width: 36px;
-      height: 36px;
-      margin: 0 8px;
-      cursor: pointer;
-      opacity: 0.8;
-    }
-    .icon-row img:hover {
-      opacity: 1;
-    }
-    #convertButton {
+
+    #carregando {
       display: none;
-      margin-top: 20px;
+      margin: 20px;
+      text-align: center;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #4CAF50;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      font-size: 13px;
+      color: #aaa;
     }
   </style>
 </head>
@@ -123,89 +151,99 @@
 
   <div class="container">
     <h2>Converter HEIC para JPG</h2>
-    <p class="subtitle">Conversor gratuito direto no navegador. Até 5 imagens por vez.</p>
+    <p>Conversor gratuito direto no navegador. Até 5 imagens por vez.</p>
 
-    <div class="dropzone" onclick="document.getElementById('upload').click()">
-      <p><strong>Arraste suas imagens aqui</strong></p>
+    <div class="upload-area" onclick="document.getElementById('upload').click()">
+      <p>Arraste suas imagens aqui</p>
       <p>ou</p>
       <button class="btn">Selecionar imagens</button>
+      <input type="file" id="upload" accept=".heic" multiple />
     </div>
 
-    <div class="icon-row">
-      <img src="https://cdn-icons-png.flaticon.com/512/270/270798.png" alt="Google Drive" title="Google Drive (em breve)" onclick="alert('Integração com Google Drive estará disponível em breve.')" />
-      <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Dropbox" title="Dropbox (em breve)" onclick="alert('Integração com Dropbox estará disponível em breve.')" />
-    </div>
+    <div id="preview"></div>
 
-    <input type="file" id="upload" accept=".heic" multiple hidden />
-    <div class="file-list" id="preview"></div>
-    <button class="btn" id="convertButton" onclick="converterImagens()">Converter imagens</button>
+    <button id="convertBtn" class="btn" onclick="converter()" style="display:none; margin-top: 20px;">Converter</button>
+
+    <div id="carregando">
+      <div class="spinner"></div>
+      Carregando...
+    </div>
   </div>
 
+  <footer>
+    &copy; 2025 ConverteHEIC - Conversor gratuito de HEIC para JPG
+  </footer>
+
   <script>
-    const upload = document.getElementById('upload');
-    const preview = document.getElementById('preview');
-    const dropzone = document.querySelector('.dropzone');
-    const convertBtn = document.getElementById('convertButton');
-    let selectedFiles = [];
+    const uploadInput = document.getElementById("upload");
+    const preview = document.getElementById("preview");
+    const convertBtn = document.getElementById("convertBtn");
+    const carregando = document.getElementById("carregando");
 
-    dropzone.addEventListener('dragover', (e) => e.preventDefault());
-    dropzone.addEventListener('drop', (e) => {
-      e.preventDefault();
-      handleFileSelection(e.dataTransfer.files);
-    });
+    let arquivosSelecionados = [];
 
-    upload.addEventListener('change', () => {
-      handleFileSelection(upload.files);
-    });
-
-    function handleFileSelection(files) {
-      selectedFiles = Array.from(files).slice(0, 5);
-      preview.innerHTML = '';
-      if (selectedFiles.length === 0) {
-        convertBtn.style.display = 'none';
+    uploadInput.addEventListener("change", () => {
+      arquivosSelecionados = Array.from(uploadInput.files).slice(0, 5);
+      preview.innerHTML = "";
+      if (arquivosSelecionados.length === 0) {
+        convertBtn.style.display = "none";
         return;
       }
 
-      selectedFiles.forEach((file, index) => {
-        const item = document.createElement('div');
-        item.className = 'file-item';
-        item.innerHTML = `
-          <span>${file.name}</span>
-          <span class="remove" onclick="removerArquivo(${index})">×</span>
-        `;
-        preview.appendChild(item);
+      arquivosSelecionados.forEach((file, index) => {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "file-entry";
+
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "🗑";
+        deleteBtn.onclick = () => {
+          arquivosSelecionados.splice(index, 1);
+          uploadInput.value = "";
+          const dataTransfer = new DataTransfer();
+          arquivosSelecionados.forEach(f => dataTransfer.items.add(f));
+          uploadInput.files = dataTransfer.files;
+          uploadInput.dispatchEvent(new Event("change"));
+        };
+
+        fileDiv.appendChild(nameSpan);
+        fileDiv.appendChild(deleteBtn);
+        preview.appendChild(fileDiv);
       });
 
-      convertBtn.style.display = 'inline-block';
-    }
+      convertBtn.style.display = "inline-block";
+    });
 
-    function removerArquivo(index) {
-      selectedFiles.splice(index, 1);
-      handleFileSelection(selectedFiles);
-    }
-
-    async function converterImagens() {
-      preview.innerHTML = '';
-      for (let file of selectedFiles) {
-        const item = document.createElement('div');
-        item.className = 'file-item';
-        item.innerHTML = `<span>Convertendo ${file.name}...</span>`;
-        preview.appendChild(item);
-
+    async function converter() {
+      carregando.style.display = "block";
+      preview.innerHTML = "";
+      for (let file of arquivosSelecionados) {
         try {
-          const resultBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.9 });
-          const url = URL.createObjectURL(resultBlob);
-          item.innerHTML = `
-            <span><a class="download-link" href="${url}" download="${file.name.replace(/\\.heic$/, '.jpg')}">⬇️ Baixar ${file.name.replace(/\\.heic$/, '.jpg')}</a></span>
-            <span class="remove" onclick="this.parentNode.remove()">×</span>
-          `;
-        } catch {
-          item.innerHTML = `<span style="color: red;">Erro ao converter ${file.name}</span>`;
+          const result = await heic2any({
+            blob: file,
+            toType: "image/jpeg",
+            quality: 0.9
+          });
+
+          const url = URL.createObjectURL(result);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = file.name.replace(/\.heic$/i, ".jpg");
+          link.textContent = `⬇️ Baixar ${link.download}`;
+          link.className = "btn";
+          link.style.display = "block";
+          link.style.margin = "10px auto";
+
+          preview.appendChild(link);
+        } catch (e) {
+          const error = document.createElement("p");
+          error.textContent = `Erro ao converter ${file.name}`;
+          preview.appendChild(error);
         }
       }
-
-      convertBtn.style.display = 'none';
-      selectedFiles = [];
+      carregando.style.display = "none";
     }
   </script>
 </body>
