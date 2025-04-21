@@ -1,17 +1,251 @@
-  <div id="redimensionar-area" style="display:none; margin-top: 30px;">
-    <h2 style="color: #4CAF50;">Redimensionar imagem</h2>
-    <p>Defina as dimensões desejadas antes de baixar:</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conversor gratuito de HEIC para JPG</title>
 
-    <label for="largura">Largura (px):</label>
-    <input type="number" id="largura" placeholder="Ex: 800" min="1">
-    <br><br>
-    <label for="altura">Altura (px):</label>
-    <input type="number" id="altura" placeholder="Ex: 600" min="1">
-    <br><br>
-    <button class="btn" onclick="redimensionarImagem()">Redimensionar e Baixar</button>
+  <meta name="description" content="Converta imagens HEIC para JPG, PNG ou WEBP gratuitamente e diretamente no navegador. Rápido, simples e seguro." />
+  <link rel="canonical" href="https://converteheic.com/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    header img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+      color: #4CAF50;
+    }
+    header nav {
+      display: flex;
+      gap: 10px;
+    }
+    header .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    header .btn:hover {
+      background-color: #45a049;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      font-size: 26px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .upload-area {
+      border: 2px dashed #4CAF50;
+      padding: 40px;
+      margin-bottom: 20px;
+      background-color: #f6fff6;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .upload-area p {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    #upload {
+      display: none;
+    }
+
+    .btn {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    select.btn {
+      background-color: white;
+      color: #4CAF50;
+      border: 2px solid #4CAF50;
+      margin-top: 10px;
+    }
+
+    select.btn:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #preview {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .file-entry {
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .file-entry span {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .file-entry button {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #carregando {
+      display: none;
+      margin: 20px;
+      text-align: center;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #4CAF50;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      font-size: 13px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="logo.png" alt="Logo" />
+      <h1>CONVERTE HEIC</h1>
+    </div>
+    <nav>
+      <a href="/" class="btn">🖼 Conversor</a>
+      <a href="/compressor.html" class="btn">📉 Compressor</a>
+      <a href="/blog" class="btn">📚 Blog</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Converter HEIC para JPG, PNG ou WEBP</h2>
+    <p>Conversor gratuito direto no navegador. Até 5 imagens por vez.</p>
+
+    <div class="upload-area" onclick="document.getElementById('upload').click()">
+      <p>Arraste suas imagens aqui</p>
+      <p>ou</p>
+      <button class="btn">Selecionar imagens</button>
+      <input type="file" id="upload" accept=".heic" multiple />
+    </div>
+
+    <div style="margin: 20px 0;">
+      <label for="formato" style="font-weight: bold;">Formato de saída:</label>
+      <select id="formato" class="btn">
+        <option value="image/jpeg" selected>JPG</option>
+        <option value="image/png">PNG</option>
+        <option value="image/webp">WEBP</option>
+      </select>
+    </div>
+
+    <div style="margin: 20px 0;">
+      <label for="qualidade" style="font-weight: bold;">Nível de compressão:</label>
+      <select id="qualidade" class="btn">
+        <option value="1">100% (sem compressão)</option>
+        <option value="0.75">75%</option>
+        <option value="0.5">50%</option>
+      </select>
+    </div>
+
+    <div id="preview"></div>
+
+    <button id="convertBtn" class="btn" onclick="converter()" style="display:none; margin-top: 20px;">Converter</button>
+
+    <div id="carregando">
+      <div class="spinner"></div>
+      Carregando...
+    </div>
+
+    <div id="redimensionar-area" style="display:none; margin-top: 30px;">
+      <h2 style="color: #4CAF50;">Redimensionar imagem</h2>
+      <p>Defina as dimensões desejadas antes de baixar:</p>
+
+      <label for="largura">Largura (px):</label>
+      <input type="number" id="largura" placeholder="Ex: 800" min="1">
+      <br><br>
+      <label for="altura">Altura (px):</label>
+      <input type="number" id="altura" placeholder="Ex: 600" min="1">
+      <br><br>
+      <button class="btn" onclick="redimensionarImagem()">Redimensionar e Baixar</button>
+    </div>
+
+    <canvas id="canvas" style="display:none;"></canvas>
   </div>
 
-  <canvas id="canvas" style="display:none;"></canvas>
+  <footer>
+    &copy; 2025 ConverteHEIC - Conversor gratuito de HEIC para JPG, PNG e WEBP
+  </footer>
 
   <script>
     const uploadInput = document.getElementById("upload");
@@ -58,6 +292,7 @@
 
     async function converter() {
       const formatoSelecionado = document.getElementById("formato").value;
+      const qualidadeSelecionada = parseFloat(document.getElementById("qualidade").value);
       carregando.style.display = "block";
       preview.innerHTML = "";
       redimensionarArea.style.display = "none";
@@ -67,7 +302,7 @@
           const result = await heic2any({
             blob: file,
             toType: formatoSelecionado,
-            quality: 0.9
+            quality: qualidadeSelecionada
           });
 
           const extensao = formatoSelecionado.split("/")[1];
@@ -129,3 +364,5 @@
       }, "image/jpeg", 0.9);
     }
   </script>
+</body>
+</html>
