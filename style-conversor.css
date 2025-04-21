@@ -86,7 +86,34 @@ p {
   cursor: pointer;
 }
 
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
 .btn:hover {
+  background-color: #45a049;
+}
+
+header a {
+  text-decoration: none;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+header a:hover {
   background-color: #45a049;
 }
 
