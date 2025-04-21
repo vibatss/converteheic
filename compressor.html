@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comprimir Imagem Online | Converte HEIC</title>
+
+  <meta name="description" content="Comprima imagens JPG, PNG ou WEBP online, gratuitamente e direto no navegador. Reduza o tamanho do arquivo sem perder qualidade." />
+  <link rel="canonical" href="https://converteheic.com/compressor.html" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      padding: 20px 30px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 22px;
+      color: #4CAF50;
+      margin: 0;
+    }
+
+    header a {
+      text-decoration: none;
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .btn {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    select.btn {
+      background-color: white;
+      color: #4CAF50;
+      border: 2px solid #4CAF50;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    #preview img {
+      max-width: 100%;
+      margin: 20px 0;
+    }
+
+    #tamanho-original, #tamanho-final {
+      font-size: 14px;
+      color: #888;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 12px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Compressor de Imagens</h1>
+    <a href="/">← Voltar</a>
+  </header>
+
+  <div class="container">
+    <h2>Comprimir imagens JPG, PNG ou WEBP</h2>
+    <p>Reduza o tamanho dos seus arquivos sem perder qualidade, direto no navegador.</p>
+
+    <button class="btn" onclick="document.getElementById('upload').click()">Selecionar imagem</button>
+    <input type="file" id="upload" accept="image/jpeg,image/png,image/webp" />
+
+    <div id="preview"></div>
+
+    <div id="info">
+      <p id="tamanho-original"></p>
+      <label for="qualidade">Nível de compressão:</label>
+      <select id="qualidade" class="btn">
+        <option value="1">100% (sem compressão)</option>
+        <option value="0.75">75%</option>
+        <option value="0.5">50%</option>
+      </select>
+      <br><br>
+      <button class="btn" onclick="comprimirImagem()">Comprimir e Baixar</button>
+      <p id="tamanho-final"></p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 ConverteHEIC - Ferramentas de edição e conversão online
+  </footer>
+
+  <canvas id="canvas" style="display:none;"></canvas>
+
+  <script>
+    const uploadInput = document.getElementById("upload");
+    const preview = document.getElementById("preview");
+    const info = document.getElementById("info");
+    const canvas = document.getElementById("canvas");
+
+    let imagemOriginal;
+
+    info.style.display = "none";
+
+    uploadInput.addEventListener("change", () => {
+      const file = uploadInput.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          imagemOriginal = img;
+          preview.innerHTML = "";
+          preview.appendChild(img);
+
+          document.getElementById("tamanho-original").textContent =
+            `Tamanho original: ${(file.size / 1024).toFixed(1)} KB`;
+
+          info.style.display = "block";
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function comprimirImagem() {
+      const qualidade = parseFloat(document.getElementById("qualidade").value);
+
+      const largura = imagemOriginal.naturalWidth;
+      const altura = imagemOriginal.naturalHeight;
+
+      canvas.width = largura;
+      canvas.height = altura;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(imagemOriginal, 0, 0, largura, altura);
+
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "imagem-comprimida.jpg";
+        link.click();
+
+        document.getElementById("tamanho-final").textContent =
+          `Tamanho após compressão: ${(blob.size / 1024).toFixed(1)} KB`;
+      }, "image/jpeg", qualidade);
+    }
+  </script>
+
+</body>
+</html>
