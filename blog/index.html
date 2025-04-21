@@ -3,71 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conversor gratuito de HEIC para JPG, PNG ou WEBP</title>
-  <meta name="description" content="Converta imagens HEIC para JPG, PNG ou WEBP gratuitamente e diretamente no navegador." />
-  <link rel="canonical" href="https://converteheic.com/" />
+  <title>Blog - Converte HEIC</title>
+  <meta name="description" content="Artigos úteis sobre arquivos HEIC, conversão, compressão e compatibilidade." />
+  <link rel="canonical" href="https://converteheic.com/blog/" />
   <meta name="robots" content="index, follow" />
-  <link rel="icon" href="favicon.png" type="image/png" />
-  <link rel="stylesheet" href="style-conversor.css" />
-  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="/style-conversor.css" />
+  <style>
+    .blog-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: left;
+    }
+    .post-preview {
+      margin-bottom: 40px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 30px;
+    }
+    .post-preview img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .post-preview h2 {
+      font-size: 22px;
+      color: #4CAF50;
+      margin-bottom: 10px;
+    }
+    .post-preview a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+    .post-preview a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
+
   <header>
     <div class="logo-container">
-      <img src="logo.png" alt="Logo" />
+      <img src="/logo.png" alt="Logo" />
       <h1>CONVERTE HEIC</h1>
     </div>
-    <nav class="nav-links">
-      <a href="/compressor.html" class="btn">Compressão</a>
-      <a href="/" class="btn">Conversão</a>
-      <a href="/blog" class="btn">Blog</a>
-    </nav>
+    <div class="nav-links">
+      <a class="btn" href="/index.html">Conversor</a>
+      <a class="btn" href="/compressor.html">Compressor</a>
+      <a class="btn" href="/blog">Blog</a>
+    </div>
   </header>
 
-  <div class="container">
-    <h2>Converter HEIC para JPG, PNG ou WEBP</h2>
-    <p>Conversor gratuito direto no navegador. Até 5 imagens por vez.</p>
+  <div class="blog-container">
+    <h2 style="text-align: center;">Blog: dicas sobre HEIC, conversão e compressão</h2>
 
-    <div class="upload-area" onclick="document.getElementById('upload').click()">
-      <p>Arraste suas imagens aqui</p>
-      <p>ou</p>
-      <button class="btn">Selecionar imagens</button>
-      <input type="file" id="upload" accept=".heic" multiple />
+    <div class="post-preview">
+      <img src="/blog/capas/capa-converter-windows.jpg" alt="Como converter arquivos HEIC no Windows" />
+      <h2>Como abrir e converter arquivos HEIC no Windows</h2>
+      <p>Aprenda a visualizar e converter arquivos HEIC no Windows com ou sem aplicativos extras.</p>
+      <a href="/blog/como-converter-heic-no-windows.html">Ler artigo completo →</a>
     </div>
 
-    <div style="margin: 20px 0;">
-      <label for="formato"><strong>Formato de saída:</strong></label>
-      <select id="formato" class="btn">
-        <option value="image/jpeg" selected>JPG</option>
-        <option value="image/png">PNG</option>
-        <option value="image/webp">WEBP</option>
-      </select>
+    <div class="post-preview">
+      <img src="/blog/capas/capa-heic-vs-jpg.jpg" alt="HEIC vs JPG: qual a melhor opção?" />
+      <h2>HEIC vs JPG: quais as diferenças e qual usar?</h2>
+      <p>Entenda o que muda entre os dois formatos, vantagens e qual faz mais sentido usar.</p>
+      <a href="/blog/heic-vs-jpg-diferencas.html">Ler artigo completo →</a>
     </div>
 
-    <div id="status-upload" style="display:none;">
-      <p id="upload-info">Carregando ficheiro <span id="arquivo-numero"></span> de <span id="arquivo-total"></span></p>
-      <p id="upload-nome"></p>
-      <div class="progress-bar">
-        <div class="progress" id="progresso"></div>
-      </div>
-      <p id="upload-porcentagem">0%</p>
-      <p id="upload-velocidade">Velocidade: 0 KB/s</p>
-    </div>
-
-    <div id="preview"></div>
-
-    <button id="convertBtn" class="btn" onclick="converter()" style="display:none; margin-top: 20px;">Converter</button>
-
-    <div id="carregando" style="display: none;">
-      <div class="spinner"></div>
-      Carregando...
+    <div class="post-preview">
+      <img src="/blog/capas/capa-converter-sem-instalar.jpg" alt="Converter arquivos HEIC sem instalar nada" />
+      <h2>Como converter arquivos HEIC sem instalar nada</h2>
+      <p>Veja como converter seus arquivos de forma online, simples e segura — direto no navegador.</p>
+      <a href="/blog/como-converter-heic-sem-instalar-nada.html">Ler artigo completo →</a>
     </div>
   </div>
 
   <footer>
-    &copy; 2025 ConverteHEIC - Conversor gratuito de HEIC para JPG, PNG e WEBP
+    &copy; 2025 ConverteHEIC - Todos os direitos reservados
   </footer>
 
-  <script src="script-conversor.js"></script>
 </body>
 </html>
