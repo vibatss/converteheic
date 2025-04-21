@@ -12,12 +12,17 @@
   <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
 </head>
 <body>
+
   <header>
     <div class="logo-container">
       <img src="logo.png" alt="Logo" />
       <h1>CONVERTE HEIC</h1>
     </div>
-    <a href="/blog" class="btn">Blog</a>
+    <div class="nav-links">
+      <a class="btn" href="/index.html">Conversor</a>
+      <a class="btn" href="/compressor.html">Compressor</a>
+      <a class="btn" href="/blog">Blog</a>
+    </div>
   </header>
 
   <div class="container">
@@ -27,7 +32,7 @@
     <div class="upload-area" onclick="document.getElementById('upload').click()">
       <p>Arraste suas imagens aqui</p>
       <p>ou</p>
-     <button class="btn">Selecionar imagens</button>
+      <button class="btn">Selecionar imagens</button>
       <input type="file" id="upload" accept=".heic" multiple />
     </div>
 
