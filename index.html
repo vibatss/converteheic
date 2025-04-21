@@ -3,190 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conversor gratuito de HEIC para JPG</title>
-
-  <meta name="description" content="Converta imagens HEIC para JPG, PNG ou WEBP gratuitamente e diretamente no navegador. Rápido, simples e seguro." />
+  <title>Conversor gratuito de HEIC para JPG, PNG ou WEBP</title>
+  <meta name="description" content="Converta imagens HEIC para JPG, PNG ou WEBP gratuitamente e diretamente no navegador." />
   <link rel="canonical" href="https://converteheic.com/" />
   <meta name="robots" content="index, follow" />
   <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="stylesheet" href="style-conversor.css" />
   <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
-
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #fafafa;
-      color: #333;
-      text-align: center;
-    }
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 30px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    header img {
-      height: 40px;
-      margin-right: 10px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 20px;
-      color: #4CAF50;
-    }
-    header nav {
-      display: flex;
-      gap: 10px;
-    }
-    header .btn {
-      background-color: #4CAF50;
-      color: white;
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-size: 14px;
-      text-decoration: none;
-    }
-    header .btn:hover {
-      background-color: #45a049;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 30px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-
-    h2 {
-      font-size: 26px;
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #666;
-      font-size: 16px;
-      margin-bottom: 25px;
-    }
-
-    .upload-area {
-      border: 2px dashed #4CAF50;
-      padding: 40px;
-      margin-bottom: 20px;
-      background-color: #f6fff6;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .upload-area p {
-      margin: 10px 0;
-      font-weight: bold;
-    }
-
-    #upload {
-      display: none;
-    }
-
-    .btn {
-      background-color: #4CAF50;
-      color: #fff;
-      border: none;
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      background-color: #45a049;
-    }
-
-    select.btn {
-      background-color: white;
-      color: #4CAF50;
-      border: 2px solid #4CAF50;
-      margin-top: 10px;
-    }
-
-    select.btn:hover {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    #preview {
-      margin-top: 20px;
-      text-align: left;
-    }
-
-    .file-entry {
-      background: #f1f1f1;
-      padding: 10px;
-      border-radius: 6px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .file-entry span {
-      font-size: 14px;
-      color: #333;
-    }
-
-    .file-entry button {
-      background: none;
-      border: none;
-      color: red;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    #carregando {
-      display: none;
-      margin: 20px;
-      text-align: center;
-    }
-
-    .spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #4CAF50;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 10px;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 10px;
-      font-size: 13px;
-      color: #aaa;
-    }
-  </style>
 </head>
 <body>
   <header>
-    <div style="display: flex; align-items: center;">
+    <div class="logo-container">
       <img src="logo.png" alt="Logo" />
       <h1>CONVERTE HEIC</h1>
     </div>
-    <nav>
-      <a href="/" class="btn">🖼 Conversor</a>
-      <a href="/compressor.html" class="btn">📉 Compressor</a>
-      <a href="/blog" class="btn">📚 Blog</a>
-    </nav>
+    <a href="/blog">📚 Blog</a>
   </header>
 
   <div class="container">
@@ -201,7 +32,7 @@
     </div>
 
     <div style="margin: 20px 0;">
-      <label for="formato" style="font-weight: bold;">Formato de saída:</label>
+      <label for="formato"><strong>Formato de saída:</strong></label>
       <select id="formato" class="btn">
         <option value="image/jpeg" selected>JPG</option>
         <option value="image/png">PNG</option>
@@ -209,160 +40,30 @@
       </select>
     </div>
 
-    <div style="margin: 20px 0;">
-      <label for="qualidade" style="font-weight: bold;">Nível de compressão:</label>
-      <select id="qualidade" class="btn">
-        <option value="1">100% (sem compressão)</option>
-        <option value="0.75">75%</option>
-        <option value="0.5">50%</option>
-      </select>
+    <div id="status-upload" style="display:none;">
+      <p id="upload-info">Carregando ficheiro <span id="arquivo-numero"></span> de <span id="arquivo-total"></span></p>
+      <p id="upload-nome"></p>
+      <div class="progress-bar">
+        <div class="progress" id="progresso"></div>
+      </div>
+      <p id="upload-porcentagem">0%</p>
+      <p id="upload-velocidade">Velocidade: 0 KB/s</p>
     </div>
 
     <div id="preview"></div>
 
     <button id="convertBtn" class="btn" onclick="converter()" style="display:none; margin-top: 20px;">Converter</button>
 
-    <div id="carregando">
+    <div id="carregando" style="display: none;">
       <div class="spinner"></div>
       Carregando...
     </div>
-
-    <div id="redimensionar-area" style="display:none; margin-top: 30px;">
-      <h2 style="color: #4CAF50;">Redimensionar imagem</h2>
-      <p>Defina as dimensões desejadas antes de baixar:</p>
-
-      <label for="largura">Largura (px):</label>
-      <input type="number" id="largura" placeholder="Ex: 800" min="1">
-      <br><br>
-      <label for="altura">Altura (px):</label>
-      <input type="number" id="altura" placeholder="Ex: 600" min="1">
-      <br><br>
-      <button class="btn" onclick="redimensionarImagem()">Redimensionar e Baixar</button>
-    </div>
-
-    <canvas id="canvas" style="display:none;"></canvas>
   </div>
 
   <footer>
     &copy; 2025 ConverteHEIC - Conversor gratuito de HEIC para JPG, PNG e WEBP
   </footer>
 
-  <script>
-    const uploadInput = document.getElementById("upload");
-    const preview = document.getElementById("preview");
-    const convertBtn = document.getElementById("convertBtn");
-    const carregando = document.getElementById("carregando");
-    const redimensionarArea = document.getElementById("redimensionar-area");
-    let arquivosSelecionados = [];
-
-    uploadInput.addEventListener("change", () => {
-      arquivosSelecionados = Array.from(uploadInput.files).slice(0, 5);
-      preview.innerHTML = "";
-      redimensionarArea.style.display = "none";
-      if (arquivosSelecionados.length === 0) {
-        convertBtn.style.display = "none";
-        return;
-      }
-
-      arquivosSelecionados.forEach((file, index) => {
-        const fileDiv = document.createElement("div");
-        fileDiv.className = "file-entry";
-
-        const nameSpan = document.createElement("span");
-        nameSpan.textContent = file.name;
-
-        const deleteBtn = document.createElement("button");
-        deleteBtn.innerHTML = "🗑";
-        deleteBtn.onclick = () => {
-          arquivosSelecionados.splice(index, 1);
-          uploadInput.value = "";
-          const dataTransfer = new DataTransfer();
-          arquivosSelecionados.forEach(f => dataTransfer.items.add(f));
-          uploadInput.files = dataTransfer.files;
-          uploadInput.dispatchEvent(new Event("change"));
-        };
-
-        fileDiv.appendChild(nameSpan);
-        fileDiv.appendChild(deleteBtn);
-        preview.appendChild(fileDiv);
-      });
-
-      convertBtn.style.display = "inline-block";
-    });
-
-    async function converter() {
-      const formatoSelecionado = document.getElementById("formato").value;
-      const qualidadeSelecionada = parseFloat(document.getElementById("qualidade").value);
-      carregando.style.display = "block";
-      preview.innerHTML = "";
-      redimensionarArea.style.display = "none";
-
-      for (let file of arquivosSelecionados) {
-        try {
-          const result = await heic2any({
-            blob: file,
-            toType: formatoSelecionado,
-            quality: qualidadeSelecionada
-          });
-
-          const extensao = formatoSelecionado.split("/")[1];
-          const url = URL.createObjectURL(result);
-          const link = document.createElement("a");
-          link.href = url;
-          link.download = file.name.replace(/\.heic$/i, `.${extensao}`);
-          link.textContent = `⬇️ Baixar ${link.download}`;
-          link.className = "btn";
-          link.style.display = "block";
-          link.style.margin = "10px auto";
-
-          const img = document.createElement("img");
-          img.src = url;
-          img.style.maxWidth = "100%";
-          img.style.marginBottom = "10px";
-          preview.appendChild(img);
-          preview.appendChild(link);
-
-          redimensionarArea.style.display = "block";
-
-        } catch (e) {
-          const error = document.createElement("p");
-          error.textContent = `Erro ao converter ${file.name}`;
-          preview.appendChild(error);
-        }
-      }
-
-      carregando.style.display = "none";
-    }
-
-    function redimensionarImagem() {
-      const largura = parseInt(document.getElementById("largura").value);
-      const altura = parseInt(document.getElementById("altura").value);
-
-      if (!largura || !altura) {
-        alert("Preencha largura e altura válidas.");
-        return;
-      }
-
-      const img = document.querySelector("#preview img");
-      if (!img) {
-        alert("Nenhuma imagem para redimensionar.");
-        return;
-      }
-
-      const canvas = document.getElementById("canvas");
-      canvas.width = largura;
-      canvas.height = altura;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0, largura, altura);
-
-      canvas.toBlob(blob => {
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "imagem-redimensionada.jpg";
-        link.click();
-      }, "image/jpeg", 0.9);
-    }
-  </script>
+  <script src="script-conversor.js"></script>
 </body>
 </html>
