@@ -2,25 +2,181 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog - Converte HEIC</title>
-  <meta name="description" content="Artigos úteis sobre arquivos HEIC, conversão, compatibilidade e dicas práticas.">
-  <link rel="canonical" href="https://converteheic.com/blog" />
+
+  <meta name="description" content="Artigos úteis sobre arquivos HEIC, conversão, formatos e dicas práticas." />
+  <link rel="canonical" href="https://converteheic.com/blog/" />
   <meta name="robots" content="index, follow" />
   <link rel="icon" href="/favicon.png" type="image/png" />
+
   <style>
-    body { font-family: Arial; max-width: 700px; margin: auto; padding: 30px; }
-    h1 { color: #4CAF50; }
-    a { color: #4CAF50; text-decoration: none; font-size: 18px; display: block; margin: 15px 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background: #fff;
+      padding: 15px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 22px;
+      color: #4CAF50;
+    }
+
+    header nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    header .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    header .btn:hover {
+      background-color: #45a049;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .container h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    .post-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+      display: flex;
+      margin-bottom: 30px;
+    }
+
+    .post-card img {
+      width: 200px;
+      object-fit: cover;
+    }
+
+    .post-content {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .post-content h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      color: #4CAF50;
+    }
+
+    .post-content p {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .post-content a {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .post-content a:hover {
+      background-color: #45a049;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 10px;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    @media (max-width: 768px) {
+      .post-card {
+        flex-direction: column;
+      }
+
+      .post-card img {
+        width: 100%;
+        height: auto;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Blog - Converte HEIC</h1>
-  <p>Artigos rápidos para te ajudar com arquivos HEIC e conversão de imagens.</p>
 
-  <a href="/blog/como-converter-heic-no-windows.html">📄 Como abrir e converter arquivos HEIC no Windows</a>
-  <a href="/blog/heic-vs-jpg-diferencas.html">📄 HEIC vs JPG: quais as diferenças e qual usar?</a>
-  <a href="/blog/como-converter-heic-sem-instalar-nada.html">📄 Como converter arquivos HEIC sem instalar nada</a>
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="/logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+      <h1>CONVERTE HEIC</h1>
+    </div>
+    <nav>
+      <a href="/" class="btn">🖼 Conversor</a>
+      <a href="/compressor.html" class="btn">📉 Compressor</a>
+      <a href="/blog" class="btn">📚 Blog</a>
+    </nav>
+  </header>
 
-  <p><a href="/">← Voltar para a página principal</a></p>
+  <div class="container">
+    <h2>Artigos e Dicas sobre HEIC e Imagens</h2>
+
+    <!-- Post 1 -->
+    <div class="post-card">
+      <img src="/blog/img/heic-windows.jpg" alt="Como abrir HEIC no Windows" />
+      <div class="post-content">
+        <h3>Como abrir e converter arquivos HEIC no Windows</h3>
+        <p>Descubra maneiras simples e rápidas de abrir arquivos HEIC no seu computador com Windows e convertê-los para JPG ou PNG.</p>
+        <a href="/blog/como-converter-heic-no-windows.html">Ler artigo →</a>
+      </div>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="post-card">
+      <img src="/blog/img/heic-vs-jpg.jpg" alt="HEIC vs JPG" />
+      <div class="post-content">
+        <h3>HEIC vs JPG: quais as diferenças e qual usar?</h3>
+        <p>Entenda as principais diferenças entre os dois formatos, suas vantagens e quando optar por cada um.</p>
+        <a href="/blog/heic-vs-jpg-diferencas.html">Ler artigo →</a>
+      </div>
+    </div>
+
+    <!-- Post 3 -->
+    <div class="post-card">
+      <img src="/blog/img/converter-sem-instalar.jpg" alt="Converter HEIC online" />
+      <div class="post-content">
+        <h3>Como converter arquivos HEIC sem instalar nada</h3>
+        <p>Veja como converter imagens HEIC direto do navegador, sem precisar baixar nenhum programa no seu computador.</p>
+        <a href="/blog/como-converter-heic-sem-instalar-nada.html">Ler artigo →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 ConverteHEIC - Conversor gratuito de HEIC para JPG e muito mais
+  </footer>
+
 </body>
 </html>
