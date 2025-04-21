@@ -10,33 +10,35 @@
   <link rel="icon" href="/favicon.png" type="image/png" />
   <link rel="stylesheet" href="/style-conversor.css" />
   <style>
-    .blog-container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
+    .blog-post {
       text-align: left;
-    }
-    .post-preview {
       margin-bottom: 40px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 30px;
     }
-    .post-preview img {
+
+    .blog-post img {
       width: 100%;
       border-radius: 10px;
       margin-bottom: 15px;
     }
-    .post-preview h2 {
-      font-size: 22px;
+
+    .blog-post h2 {
       color: #4CAF50;
-      margin-bottom: 10px;
+      font-size: 22px;
+      margin: 10px 0;
     }
-    .post-preview a {
-      text-decoration: none;
+
+    .blog-post p {
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .blog-post a {
       font-weight: bold;
       color: #4CAF50;
+      text-decoration: none;
     }
-    .post-preview a:hover {
+
+    .blog-post a:hover {
       text-decoration: underline;
     }
   </style>
@@ -55,24 +57,24 @@
     </div>
   </header>
 
-  <div class="blog-container">
-    <h2 style="text-align: center;">Blog: dicas sobre HEIC, conversão e compressão</h2>
+  <div class="container">
+    <h2 style="margin-bottom: 40px;">Blog: dicas sobre HEIC, conversão e compressão</h2>
 
-    <div class="post-preview">
+    <div class="blog-post">
       <img src="/blog/capas/capa-converter-windows.jpg" alt="Como converter arquivos HEIC no Windows" />
       <h2>Como abrir e converter arquivos HEIC no Windows</h2>
       <p>Aprenda a visualizar e converter arquivos HEIC no Windows com ou sem aplicativos extras.</p>
       <a href="/blog/como-converter-heic-no-windows.html">Ler artigo completo →</a>
     </div>
 
-    <div class="post-preview">
+    <div class="blog-post">
       <img src="/blog/capas/capa-heic-vs-jpg.jpg" alt="HEIC vs JPG: qual a melhor opção?" />
       <h2>HEIC vs JPG: quais as diferenças e qual usar?</h2>
       <p>Entenda o que muda entre os dois formatos, vantagens e qual faz mais sentido usar.</p>
       <a href="/blog/heic-vs-jpg-diferencas.html">Ler artigo completo →</a>
     </div>
 
-    <div class="post-preview">
+    <div class="blog-post">
       <img src="/blog/capas/capa-converter-sem-instalar.jpg" alt="Converter arquivos HEIC sem instalar nada" />
       <h2>Como converter arquivos HEIC sem instalar nada</h2>
       <p>Veja como converter seus arquivos de forma online, simples e segura — direto no navegador.</p>
@@ -81,7 +83,7 @@
   </div>
 
   <footer>
-    &copy; 2025 ConverteHEIC - Todos os direitos reservados
+    &copy; 2025 ConverteHEIC - Ferramentas de edição e conversão online
   </footer>
 
 </body>
