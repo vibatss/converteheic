@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Comprimir PDF Online | Converte HEIC</title>
+  <meta name="description" content="Comprima arquivos PDF grandes gratuitamente e direto no navegador. Reduza o tamanho do PDF sem perder qualidade." />
+  <link rel="canonical" href="https://converteheic.com/compressor-pdf.html" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="style-conversor.css" />
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo" />
+      <h1>CONVERTE HEIC</h1>
+    </div>
+    <nav>
+      <a href="/">Conversor HEIC</a>
+      <a href="/compressor.html">Compressor de Imagens</a>
+      <a href="/compressor-pdf.html" style="background-color: #388e3c;">Compressor de PDF</a>
+      <a href="/blog">Blog</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Comprimir PDF Online</h2>
+    <p>Comprima arquivos PDF grandes gratuitamente, sem instalar nada. Todo o processo é feito no seu navegador.</p>
+
+    <button class="btn" onclick="document.getElementById('upload').click()">Selecionar PDF</button>
+    <input type="file" id="upload" accept="application/pdf" style="display: none;" />
+
+    <div id="preview" style="margin-top: 30px;"></div>
+
+    <div id="carregando" style="display: none;">
+      <div class="spinner"></div>
+      Comprimindo PDF...
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 ConverteHEIC - Ferramentas gratuitas de conversão e compressão
+  </footer>
+
+  <script>
+    const uploadInput = document.getElementById("upload");
+    const preview = document.getElementById("preview");
+    const carregando = document.getElementById("carregando");
+
+    uploadInput.addEventListener("change", async () => {
+      const file = uploadInput.files[0];
+      if (!file || !file.name.endsWith(".pdf")) {
+        preview.innerHTML = "<p style='color: red;'>Selecione um arquivo PDF válido.</p>";
+        return;
+      }
+
+      carregando.style.display = "block";
+      preview.innerHTML = "";
+
+      const arrayBuffer = await file.arrayBuffer();
+
+      try {
+        const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { updateMetadata: true });
+
+        const copiedPages = await pdfDoc.copyPages(pdfDoc, pdfDoc.getPageIndices());
+        const newPdf = await PDFLib.PDFDocument.create();
+
+        copiedPages.forEach((page) => newPdf.addPage(page));
+
+        // Compressão simples (reexporta com stream compactado)
+        const compressedPdfBytes = await newPdf.save({ useObjectStreams: true });
+
+        const blob = new Blob([compressedPdfBytes], { type: "application/pdf" });
+        const url = URL.createObjectURL(blob);
+
+        const sizeBefore = (file.size / 1024).toFixed(1);
+        const sizeAfter = (blob.size / 1024).toFixed(1);
+
+        const msg = document.createElement("p");
+        msg.innerHTML = `✅ <strong>PDF comprimido com sucesso.</strong><br><br>
+                         Tamanho original: <strong>${sizeBefore} KB</strong><br>
+                         Tamanho final: <strong>${sizeAfter} KB</strong>`;
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "pdf-comprimido.pdf";
+        link.className = "btn";
+        link.style.display = "inline-block";
+        link.style.marginTop = "20px";
+        link.textContent = "⬇️ Baixar PDF Comprimido";
+
+        preview.appendChild(msg);
+        preview.appendChild(link);
+      } catch (err) {
+        preview.innerHTML = "<p style='color:red;'>Erro ao processar o PDF. Tente outro arquivo.</p>";
+      }
+
+      carregando.style.display = "none";
+    });
+  </script>
+</body>
+</html>
