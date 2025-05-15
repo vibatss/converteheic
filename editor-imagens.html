@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Editor de Imagens | Converte HEIC</title>
+  <meta name="description" content="Edite suas imagens online gratuitamente com ferramentas avançadas de edição.">
+  <link rel="canonical" href="https://converteheic.com/editor-imagens.html">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="stylesheet" href="style-conversor.css">
+  <script src="https://cdn.scaleflex.it/plugins/filerobot-image-editor/3.15.0/filerobot-image-editor.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo">
+      <h1>CONVERTE HEIC</h1>
+    </div>
+    <nav>
+      <a href="/">Conversor HEIC</a>
+      <a href="/compressor.html">Compressor de Imagens</a>
+      <a href="/compressor-pdf.html">Compressor de PDF</a>
+      <a href="/editor-imagens.html" style="background-color: #388e3c;">Editor de Imagens</a>
+      <a href="/blog">Blog</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Editor de Imagens Online</h2>
+    <p>Edite suas imagens gratuitamente, sem necessidade de instalação. Ajuste brilho, contraste, adicione filtros e muito mais diretamente no seu navegador.</p>
+
+    <button class="btn" onclick="abrirEditor()">Selecionar Imagem</button>
+  </div>
+
+  <footer>
+    &copy; 2025 ConverteHEIC - Ferramentas gratuitas de conversão e edição de imagens
+  </footer>
+
+  <script>
+    function abrirEditor() {
+      const editor = new FilerobotImageEditor();
+
+      editor.open();
+    }
+  </script>
+</body>
+</html>
